@@ -1,11 +1,22 @@
+sudo: required
+dist: trusty
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+
 language: python
 python:
   - '3.8.0'
 
 before_script:
+
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
   - pipenv install
-  - pipenv install linuxbrew-wrapper
-  - brew install --cask chromedriver
+  - sleep 3
   
 
 env: DJANGO_SETTINGS_MODULE="purbeurre.settings.travis"
