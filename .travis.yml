@@ -1,12 +1,9 @@
-sudo: required
-dist: trusty
 addons:
+  chrome: stable
   apt:
-    sources:
-      - google-chrome
     packages:
-      - google-chrome-stable
-
+      - chromium-chromedriver
+      
 language: python
 python:
   - '3.8.0'
@@ -14,10 +11,9 @@ python:
 before_script:
 
  - pipenv install
- - wget http://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_linux64.zip
- - unzip chromedriver_linux64.zip -d /home/travis/virtualenv/python3.8.0/
- - export CHROME_BIN=chromium-browser
- - "export DISPLAY=:99.0"
+ - ln --symbolic /usr/lib/chromium-browser/chromedriver "${HOME}/bin/chromedriver"
+ - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+
   
 
 env: DJANGO_SETTINGS_MODULE="purbeurre.settings.travis"
@@ -27,3 +23,4 @@ services:
 
 script:
   - ./manage.py test
+
