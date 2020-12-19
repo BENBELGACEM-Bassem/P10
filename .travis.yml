@@ -2,6 +2,10 @@ language: python
 python:
   - '3.8.0'
 
+dist: trusty
+addons:
+  chrome: stable
+  
 before_script:
   - pipenv install
   - wget http://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_mac64.zip
