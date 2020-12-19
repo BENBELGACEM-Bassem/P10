@@ -1,21 +1,41 @@
-language: python
-python:
-  - '3.8.0'
+matrix:
+  include:
+    - os: linux
+      python: '3.8.0'
+      sudo: required
+      env: DISPLAY=':99.0'
+      dist: trusty
+      addons:
+        apt:
+          update: true
+          sources:
+            - google-chrome
+          packages:
+            - dpkg
+            - google-chrome-stable
+    - os: osx
+      python: '3.8.0'
+      sudo: required
+      env: HOMEBREW_CASK_OPTS='--appdir=/Applications'
+
+before_install:
+  - |
+    if [ "$TRAVIS_OS_NAME" = "osx" ]; then
+      brew update > /dev/null
+      brew cask install google-chrome
+    fi
 
 before_script:
   - pipenv install
-  - pipenv install homebrew
-  - brew install --cask chromedriver
-  
+  - |
+    if [ "$TRAVIS_OS_NAME" = "linux" ]; then
+      sh -e /etc/init.d/xvfb start
+    fi
 
 env: DJANGO_SETTINGS_MODULE="purbeurre.settings.travis"
-
 services:
   - postgresql
-
 script:
   - ./manage.py test
-
-
 
 
