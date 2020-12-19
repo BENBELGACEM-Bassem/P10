@@ -3,7 +3,7 @@ addons:
   apt:
     packages:
       - chromium-chromedriver
-      
+
 language: python
 python:
   - '3.8.0'
@@ -13,6 +13,7 @@ before_script:
  - pipenv install
  - ln --symbolic /usr/lib/chromium-browser/chromedriver "${HOME}/bin/chromedriver"
  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+ - sleep 3
 
   
 
