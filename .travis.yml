@@ -16,8 +16,9 @@ services:
 before_script:
 
  - pipenv install
- - ln --symbolic /usr/lib/chromium-browser/chromedriver "${HOME}/bin/chromedriver"
- - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+ - wget http://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_linux64.zip
+ - unzip chromedriver_linux64.zip -d /home/travis/virtualenv/python3.8.0/
+ - export CHROME_BIN=chromium-browser
  - "export DISPLAY=:99.0"
  - "sh -e /etc/init.d/xvfb start"
  - sleep 3 
