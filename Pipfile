@@ -13,6 +13,7 @@ django = "*"
 django-crispy-forms = "*"
 django-on-heroku = "*"
 requests = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"
