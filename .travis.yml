@@ -1,15 +1,17 @@
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+
+
 language: python
 python:
   - '3.8.0'
 
 before_script:
   - pipenv install
-
-  - wget http://chromedriver.storage.googleapis.com/87.0.4280.88/chromedriver_mac64.zip
-
-  - unzip chromedriver_mac64.zip -d /home/travis/virtualenv/python3.8.0/bin/
-
-  - export CHROME_BIN=chromium-browser
 
 env: DJANGO_SETTINGS_MODULE="purbeurre.settings.travis"
 
