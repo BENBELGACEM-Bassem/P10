@@ -28,7 +28,7 @@ class ProductManager(models.Manager):
             reverse=True)
         # Leave only equal or better grade among similar_products
         healthier_candidate_objects = [
-            similar_product[0] for similar_product in sorted_by_similarity]
+            similar_product[0] for similar_product in sorted_by_similarity if similar_product[2] < product.nutrition_grade]
         # Get a queryset from this list
         healthier_candidate_object_ids = [
             product.id for product in healthier_candidate_objects]
