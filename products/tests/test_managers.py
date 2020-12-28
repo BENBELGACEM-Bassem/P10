@@ -11,7 +11,7 @@ from products.models import Product, Category
 class TestProductManager(TestCase):
     @classmethod
     def setUp(self):
-        # Create a categories
+        # Create test categories
         test_category1 = Category.objects.create(
             category_name='test_category1')
         test_category2 = Category.objects.create(

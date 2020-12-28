@@ -50,4 +50,4 @@ class MySeleniumTests(StaticLiveServerTestCase):
             self.selenium, timeout=10).until(
             EC.presence_of_element_located(
                 (By.ID, "alert_message")))
-        assert "Vous êtes désoramais connectés." in message.text
+        assert "Vous êtes désormais connectés." in message.text
