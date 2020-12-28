@@ -20,6 +20,6 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
-    def save(self):
+    def save(self, *args, **kwargs):
     	self.email = self.username
     	super().save()

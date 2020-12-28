@@ -3,13 +3,17 @@
 
 """Define views managing a user activities on the site"""
 
+from .forms import UserForm
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
 from django.views.generic.edit import FormView
 from django.views.generic.base import TemplateView
-from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
-from django.urls import reverse_lazy
-from django.contrib.messages.views import SuccessMessageMixin
-
-from .forms import UserForm
+from django.contrib.auth.views import (LoginView,
+                                       LogoutView,
+                                       PasswordResetView,
+                                       PasswordResetDoneView,
+                                       PasswordResetConfirmView,
+                                       PasswordResetCompleteView)
 
 
 class SignUpView(SuccessMessageMixin, FormView):
