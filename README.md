@@ -17,6 +17,9 @@ Go to this link to see the web site deployed on production: http://46.101.12.176
 For 11th project:
 the purpose is to improve/refactor a test and add a new feature.
 From now on you can reset your password, in case it is forgotten.
+Do not forget to replace these parameters within purbeurre/settings/__init__.py, by your email and password:
+EMAIL_HOST_USER 
+EMAIL_HOST_PASSWORD 
 
 
 
