@@ -60,20 +60,21 @@ class TestProductManager(TestCase):
             nutrition_image='http://ingredients.com'
         )
         # Link substituted to 3 categories
-        self.to_be_substituted.category.add(test_category1)
-        self.to_be_substituted.category.add(test_category2)
-        self.to_be_substituted.category.add(test_category3)
+        for i in (test_category1, test_category2, test_category3):
+            self.to_be_substituted.category.add(i)
+
         # Link candidates from most similar to less similar
-        self.candidate1.category.add(test_category1)
-        self.candidate1.category.add(test_category2)
-        self.candidate1.category.add(test_category3)
-        self.candidate2.category.add(test_category1)
-        self.candidate2.category.add(test_category2)
+        for i in (test_category1, test_category2, test_category3):
+            self.candidate1.category.add(i)
+
+        for i in (test_category1, test_category2):
+            self.candidate2.category.add(i)
+
         self.candidate3.category.add(test_category1)
+
         # Link candidate4 which is similar but not healthier
-        self.candidate4.category.add(test_category1)
-        self.candidate4.category.add(test_category2)
-        self.candidate4.category.add(test_category3)
+        for i in (test_category1, test_category2, test_category3):
+            self.candidate4.category.add(i)
 
     def test_get_substitute_candidates(self):
         product = self.to_be_substituted
