@@ -51,3 +51,25 @@ class MySeleniumTests(StaticLiveServerTestCase):
             EC.presence_of_element_located(
                 (By.ID, "alert_message")))
         assert "Vous êtes désormais connectés." in message.text
+
+    def test_get_reset_done_message(self):
+        User.objects.create_user(
+            username='myuser@gmail.com',
+            first_name='test',
+            password='connectme1234')
+        # Go to the reset page
+        self.selenium.get('%s%s' % (self.live_server_url, '/users/password_reset'))
+        time.sleep(1)
+        # Enter the email adress
+        username_input = self.selenium.find_element(By.ID, "id_email")
+        username_input.send_keys('myuser@gmail.com')
+        time.sleep(1)
+        # Click on reset button
+        self.selenium.find_element(
+            By.ID, "button-addon2").click()
+        time.sleep(2)
+        message = WebDriverWait(
+            self.selenium, timeout=10).until(
+            EC.presence_of_element_located(
+                (By.ID, "done_message")))
+        assert "Un e-mail vous a été envoyé " in message.text
