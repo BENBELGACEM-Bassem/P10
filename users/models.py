@@ -14,7 +14,12 @@ class User(AbstractUser):
         db_table = 'User'
 
     first_name = models.CharField(max_length=200)
+
     REQUIRED_FIELDS = []
 
     def __str__(self):
         return self.username
+
+    def save(self):
+    	self.email = self.username
+    	super().save()

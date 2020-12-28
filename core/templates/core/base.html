@@ -35,15 +35,12 @@
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto my-2 my-lg-0">
                         	<!-- Navbar search form -->
-
                             <li class="nav-item">
                             	<form id="navbar_search" class="form-inline" action="{% url 'core:home' %}" method="POST">
                             		{% csrf_token %}
-                                    {{form}}
-                                    
+                                    {{form}}                                    
                             	</form>
                             </li>
-
                             <!-- Go to account -->
                             <li class="nav-item">
                             	{% if user.is_authenticated %}  

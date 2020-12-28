@@ -5,9 +5,10 @@
 
 from django.views.generic.edit import FormView
 from django.views.generic.base import TemplateView
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
+
 from .forms import UserForm
 
 
@@ -41,7 +42,7 @@ class ConnectView(SuccessMessageMixin, LoginView):
     success_url = reverse_lazy('core:home')
 
     def form_valid(self, form):
-        self.success_message = "Vous êtes désoramais connectés."
+        self.success_message = "Vous êtes désormais connectés."
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -63,3 +64,48 @@ class AccountView(TemplateView):
     """Define a view to manage a user account page"""
 
     template_name = 'users/account.html'
+
+
+# Reset password views
+
+class ResetView(PasswordResetView):
+    """Define a view to manage password reset action"""
+
+    template_name = 'users/password_reset.html'
+    success_url = reverse_lazy('users:password_reset_done')
+    email_template_name = 'users/password_reset_email.html'
+
+    def get_context_data(self, **kwargs):
+        """Define context data"""
+    # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+    # Change the context form name
+        context['password_reset_form'] = context.pop('form')
+        return context
+
+
+class ResetDoneView(PasswordResetDoneView):
+    """Define a view to show successfull password reset message"""
+
+    template_name = 'users/password_reset_done.html'
+
+
+class ResetConfirmView(PasswordResetConfirmView):
+    """Define a view to manage password reset action"""
+
+    template_name = 'users/password_reset_confirm.html'
+    success_url = reverse_lazy('users:password_reset_complete')
+
+    def get_context_data(self, **kwargs):
+        """Define context data"""
+    # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+    # Change the context form name
+        context['password_reset_confirm_form'] = context.pop('form')
+        return context
+
+
+class ResetCompleteView(PasswordResetCompleteView):
+    """Define a view to show successfull password reset message"""
+
+    template_name = 'users/password_reset_complete.html'
